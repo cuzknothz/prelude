@@ -43,7 +43,7 @@ export default function Home() {
       <Canvas gl={{preserveDrawingBuffer:true}}>
         
         <SheetProvider sheet={demoSheet}>
-        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75}/>
+        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
 
           <LayerMaterial side={THREE.BackSide}>
             <Depth
