@@ -8,14 +8,13 @@ import * as THREE from "three";
 import { getProject } from "@theatre/core";
 import studio from "@theatre/studio";
 import extension from "@theatre/r3f/dist/extension";
-import {editable as e, SheetProvider} from '@theatre/r3f'
-import {PerspectiveCamera} from '@theatre/r3f'
-
+import { editable as e, SheetProvider } from "@theatre/r3f";
+import { PerspectiveCamera } from "@theatre/r3f";
 
 studio.initialize();
 studio.extend(extension);
 
-const demoSheet = getProject("Demo Project").sheet("Demo Sheet");
+const demoSheet = getProject("Home").sheet("Main");
 
 function Box() {
   const mesh = useRef<THREE.Mesh>(null);
@@ -23,7 +22,8 @@ function Box() {
   const [active, setActive] = useImmer(false);
   useFrame((state, delta) => (mesh.current!.rotation.x += 0.01));
   return (
-    <e.mesh theatreKey="cube"
+    <e.mesh
+      theatreKey="cube"
       position={[0, 0, 0]}
       ref={mesh}
       scale={active ? 1.5 : 1}
@@ -40,10 +40,14 @@ function Box() {
 export default function Home() {
   return (
     <main className="w-screen h-screen">
-      <Canvas gl={{preserveDrawingBuffer:true}}>
-        
+      <Canvas gl={{ preserveDrawingBuffer: true }}>
         <SheetProvider sheet={demoSheet}>
-        <PerspectiveCamera theatreKey="Camera" makeDefault position={[5, 5, -5]} fov={75} />
+          <PerspectiveCamera
+            theatreKey="Camera"
+            makeDefault
+            position={[5, 5, -5]}
+            fov={75}
+          />
 
           <LayerMaterial side={THREE.BackSide}>
             <Depth
